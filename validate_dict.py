@@ -28,7 +28,10 @@ class ValidateEnclosurePOST(BaseValidatePOST):
 
 class ValidatedCoolerPOST(BaseValidatePOST):
     required_keys = [
-        ''
+        "air_in_temperature",
+        "air_out_temperature",
+        "air_in_humidity",
+        "air_out_humidity"
     ]
 
 
