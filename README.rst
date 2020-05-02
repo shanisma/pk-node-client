@@ -1,3 +1,14 @@
+Prepare ESP32 + MicroPython
+===========================
+
+Flash ESP
+
+.. code-block:: shell
+
+    esptool.py --port COM3 erase_flash
+    esptool.py --chip esp32 --port COM3 write_flash -z 0x1000 esp32_gen.bin
+
+
 Plant Keeper Client for ESP32
 =============================
 
