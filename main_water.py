@@ -71,7 +71,7 @@ if __name__ == '__main__':
     while True:
         try:
             raw_distance = water_level_sensor.distance_mm()
-            percent = WATER_LEVEL_FIT(raw_distance)
+            percent = int(WATER_LEVEL_FIT(raw_distance))
 
             # Post to Api Gateway sensor value
             pk.post({"level": percent})
@@ -87,7 +87,7 @@ if __name__ == '__main__':
             tft.fillrect((0, 50), (128, 160), POWER_COLOR)
             # Print relevant values for user
             tft.text((2, 50), "Raw distance: " + str(raw_distance), TFT.BLACK, sysfont, 1.1, nowrap=False)
-            tft.text((2, 60), "Percent full: " + str(percent), TFT.BLACK, sysfont, 1.1, nowrap=False)
+            tft.text((2, 60), "% fill: " + str(percent), TFT.BLACK, sysfont, 1.1, nowrap=False)
             tft.text((2, 70), "Power: " + str(pk.power), TFT.BLACK, sysfont, 1.1, nowrap=False)
             # +----------------------------------------------------+
             # | Activate / Deactivate relay                        |
