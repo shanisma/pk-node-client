@@ -7,16 +7,30 @@ source : https://github.com/boochow/MicroPython-ST7735
 Author : boochow @github
 
 Pins connection
-LCD 	    ESP32
-===================
-VLED/BLK 	3V3
-RST 	    IO17
-A0/DC      	IO16(DC)
-SDA     	IO13(MOSI)
-SCK     	IO14(CLK)
-VCC     	3V3
-CS 	        IO18
-GND     	GND
+LCD (Yourbot)    ESP32
+==============================
+VLED/BLK         3V3
+RST 	         IO17
+A0/DC/RS         IO16(DC)
+SDA              IO13(MOSI)
+SCK              IO14(CLK)
+VCC              3V3
+CS 	             IO18
+GND              GND
+
+
+LCD (Az Delevery)    ESP32
+==============================
+VLED/BLK         3V3
+RST 	         IO4
+A0/DC/RS         IO2
+SDA              IO23
+SCK              IO18
+VCC              5v
+CS 	             IO15
+GND              GND
+
+
 
 """
 
