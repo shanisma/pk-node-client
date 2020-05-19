@@ -41,12 +41,12 @@ RELAY = Pin(26, Pin.OUT)
 SPI = SPI(
     2, baudrate=20000000,
     polarity=0, phase=0,
-    sck=Pin(14), mosi=Pin(13), miso=Pin(12)
+    sck=Pin(18), mosi=Pin(23), miso=Pin(12)
 )
 POWER_COLOR = TFT.GREEN
 
 # Print Node information / Static section
-tft = TFT(SPI, 16, 17, 18)
+tft = TFT(SPI, 2, 4, 15)
 tft.initb2()
 tft.rgb(True)
 tft.fill(TFT.BLACK)
