@@ -2,7 +2,7 @@
 
 Plant keeper Water ESP32 firmware
 Use:
-    - Pin 34 for HCSR04 trigger, 35 for echo, use +5V not +3.3V
+    - Pin 21 for HCSR04 trigger, 22 for echo, use +5V not +3.3V
     - Pin 26 for Pump activation
     - TFT Screen ST7735 Pins: 4, 2, 23, 18, 15
         tested with supplier = Az Delevery
