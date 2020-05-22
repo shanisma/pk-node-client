@@ -32,7 +32,7 @@ PK_API_GATEWAY_PORT = 8001
 water_level_sensor = HCSR04(trigger_pin=21, echo_pin=22, echo_timeout_us=10000)
 WATER_LEVEL_FIT = fit(
     # Map analog read min/max
-    [125, 0],
+    [118, 34],
     # to 0% to 100%
     [0, 100]
 )
