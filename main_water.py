@@ -37,7 +37,7 @@ WATER_LEVEL_FIT = fit(
     [0, 100]
 )
 # Relay for valve power on / power off
-RELAY = Pin(26, Pin.OUT)
+PUMP_RELAY = Pin(26, Pin.OUT)
 
 SPI = SPI(
     2, baudrate=20000000,
@@ -94,45 +94,25 @@ if __name__ == '__main__':
             # +----------------------------------------------------+
             if not last_power:
                 last_power = pk.power
-                RELAY.value(pk.power)
+                PUMP_RELAY.value(pk.power)
             else:
                 if pk.power != last_power:
-                    RELAY.value(pk.power)
+                    PUMP_RELAY.value(pk.power)
             last_power = pk.power
 
             gc.collect()
             time.sleep(0.5)
-        except OSError as ex:
-            RELAY.value(0)
+        except Exception as ex:
+            PUMP_RELAY.value(0)
             last_power = 0
-            tft.fillrect((95, 60), (30, 10), POWER_COLOR)
             tft.text((2, 60), "ERROR ", TFT.BLACK, sysfont, 2, nowrap=False)
-            tft.text((2, 80), "POWER=0 ", TFT.BLACK, sysfont, 2, nowrap=False)
             tft.text(
-                (2, 100),
-                "Reason:  "
-                " can not communicate with "
-                " Water level sensor",
+                (2, 80),
+                str(ex.__class__.__name__) + ":" + str(ex),
                 TFT.BLACK,
                 sysfont,
                 1.2,
                 nowrap=False
             )
-            time.sleep(2)
-        except:
-            RELAY.value(0)
-            last_power = 0
-            tft.fillrect((95, 60), (30, 10), POWER_COLOR)
-            tft.text((2, 60), "ERROR ", TFT.BLACK, sysfont, 2, nowrap=False)
-            tft.text((2, 80), "POWER=0 ", TFT.BLACK, sysfont, 2, nowrap=False)
-            tft.text(
-                (2, 100),
-                "Reason:  "
-                " can not communicate with  API Gateway, "
-                "is   the  server  up   and running ?",
-                TFT.BLACK,
-                sysfont,
-                1.2,
-                nowrap=False
-            )
+            gc.collect()
             time.sleep(2)
