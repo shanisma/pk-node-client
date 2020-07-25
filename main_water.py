@@ -26,8 +26,8 @@ import node_type
 
 # Node and Api Gateway setting
 NODE_TYPE = node_type.WATER
-PK_API_GATEWAY_HOST = '10.3.141.1'
-PK_API_GATEWAY_PORT = 8001
+PK_API_GATEWAY_HOST = '192.168.0.5'
+PK_API_GATEWAY_PORT = 31801
 # Soil humidity sensors setting
 water_level_sensor = HCSR04(trigger_pin=21, echo_pin=22, echo_timeout_us=10000)
 water_level_fitter = fit(
@@ -103,6 +103,13 @@ pk = PlantKeeper(
     port=PK_API_GATEWAY_PORT
 )
 pk.set_node_type(node_type=NODE_TYPE)
+
+while not pk.is_gateway_up():
+    tft.fillrect((0, 50), (128, 160), TFT.RED)
+    tft.text((2, 60), "ERROR ", TFT.BLACK, sysfont, 2, nowrap=False)
+    tft.text((2, 80), "Can not reach Api-Gateway, is Api-Gateway up ?", TFT.BLACK, sysfont, 1.1, nowrap=False)
+    gc.collect()
+    time.sleep(2)
 
 last_power = False
 if __name__ == '__main__':
