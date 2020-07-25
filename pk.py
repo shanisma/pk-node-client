@@ -50,6 +50,15 @@ class PlantKeeper:
         self.json = None
 
     @property
+    def gateway(self):
+        return (
+                'http://'
+                + self.host
+                + ':'
+                + str(self.port)
+        )
+
+    @property
     def api(self):
         return (
                 'http://'
@@ -60,6 +69,17 @@ class PlantKeeper:
                 + str(self.node_type)
                 + '/'
         )
+
+    def is_gateway_up(self):
+        r = requests.get(
+            self.gateway,
+            json={},
+            headers=self.header
+        )
+        if r.status_code == 200:
+            return True
+        else:
+            return False
 
     def get_post_validator(self):
         if self.node_type == ENCLOSURE:
