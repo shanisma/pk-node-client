@@ -10,10 +10,16 @@ NODE_TAG = 'orchid'
 
 _SENSOR_TOPIC = NODE_TYPE + "/" + NODE_TAG + "/" + "sensor"
 _CONTROLLER_TOPIC = NODE_TYPE + "/" + NODE_TAG + "/" + "controller"
+_REGISTRY_SIGN_TOPIC = NODE_TYPE + "/" + NODE_TAG + "/" + "registry"
+_REGISTRY_VALIDATION_TOPIC = NODE_TYPE + "/" + NODE_TAG + "/" + "registry/validate"
 
 
 def read_sensors():
-    return ujson.dumps({"humidity_level": random.randint(0, 100)})
+    return ujson.dumps(
+        {
+            "soil_moisture": random.randint(0, 100)
+        }
+    )
 
 
 def controller_callback(topic, msg):
@@ -35,6 +41,9 @@ def publish_sensors():
     while True:
         pub_client.publish(_SENSOR_TOPIC, read_sensors())
 
+
+registry_client = MQTTClient(NODE_TYPE + "_" + NODE_TAG + "_" + "REGISTRY ", SERVER, PORT)
+registry_client.set_callback(controller_callback)
 
 sub_client = MQTTClient(NODE_TYPE + "_" + NODE_TAG + "_" + "SUB", SERVER, PORT)
 sub_client.set_callback(controller_callback)
