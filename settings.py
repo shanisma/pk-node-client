@@ -1,0 +1,47 @@
+from machine import SPI, Pin, ADC
+from utils import fit
+from ST7735 import TFT
+
+# =================== Init TFT Screen =====================
+# =========================================================
+SPI = SPI(
+    2, baudrate=20000000,
+    polarity=0, phase=0,
+    sck=Pin(18), mosi=Pin(23), miso=Pin(12)
+)
+POWER_COLOR = TFT.GREEN
+tft = TFT(SPI, 2, 4, 15)
+tft.initb2()
+tft.rgb(True)
+
+# ============= Node type: Sprinkler settings =============
+# =========================================================
+soil_moisture_sensor = ADC(Pin(34))
+soil_moisture_sensor.atten(ADC.ATTN_11DB)
+soil_moisture_model = fit(
+    # Map analog read min/max
+    [2300, 1360],
+    # to 0% to 100%
+    [0, 100]
+)
+# Relay for valve power on / power off
+sprinkler_valve = Pin(26, Pin.OUT)
+
+# ============= Node type: Water settings =================
+# =========================================================
+
+# ======= Node type: Deep Water Culture Tank settings =====
+# =========================================================
+
+# ==== Node type: Deep Water Culture Endpoint settings ====
+# =========================================================
+
+# ============= Node type: Air Cooler settings ============
+# =========================================================
+
+# ============= Node type: Air Humidifier settings ========
+# =========================================================
+
+# ============= Node type: Air Heater settings ============
+# =========================================================
+
