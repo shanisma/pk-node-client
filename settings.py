@@ -2,6 +2,14 @@ from machine import SPI, Pin, ADC
 from utils import fit
 from ST7735 import TFT
 
+# ======================== WIFI  ==========================
+# =========================================================
+WIFI_SSID = "< my wifi ssid (name) >"
+WIFI_PASSWORD = "< my wifi password >"
+# =================== MQTT SERVER =========================
+# =========================================================
+MQTT_SERVER = "< mqtt http endpoint >"
+MQTT_PORT = 32500
 # =================== Init TFT Screen =====================
 # =========================================================
 SPI = SPI(
