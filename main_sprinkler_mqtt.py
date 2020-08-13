@@ -91,6 +91,7 @@ def publish_sensors():
     def read_sensors():
         return ujson.dumps(
             {
+                "tag": NODE_TAG,
                 "soil_moisture": random.randint(0, 100)
             }
         )
