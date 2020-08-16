@@ -82,7 +82,7 @@ def register_sprinkler(tag):
     api = (
             API_GATEWAY_URL
             + ":"
-            + API_GATEWAY_PORT
+            + str(API_GATEWAY_PORT)
             + "/sprinkler/registry"
     )
     header = {
