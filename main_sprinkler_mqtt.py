@@ -1,6 +1,5 @@
 import gc
 import ujson
-import random
 import _thread
 from ST7735 import TFT
 from sysfont import sysfont
@@ -12,7 +11,7 @@ from settings import (
     WIFI_SSID
 )
 from utils import register_sprinkler
-from sprinkler_io import read_sensors
+from sprinkler_io import read_sensors, water_valve_relay
 
 gc.enable()
 
@@ -43,6 +42,7 @@ def subscribe_controller():
         d = ujson.loads(msg)
         if d['tag'] == NODE_TAG:
             flow_dict['current']['water_valve_signal'] = d['water_valve_signal']
+            water_valve_relay.value(d['water_valve_signal'])
 
     c = MQTTClient(
         NODE_TYPE
