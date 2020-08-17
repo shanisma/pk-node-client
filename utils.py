@@ -1,10 +1,13 @@
 """
-Generate model to scale analog data to user defined range
-Source: http://code.activestate.com/recipes/578914-simple-linear-regression-with-pure-python/
-
-Author : Chaobin Tang  http://code.activestate.com/recipes/users/4174076/
-License : MIT
-
+function/method => mean, std, pearson_r, fit :
+    Generate model to scale analog data to user defined range
+    Source: http://code.activestate.com/recipes/578914-simple-linear-regression-with-pure-python/
+    Author : Chaobin Tang  http://code.activestate.com/recipes/users/4174076/
+    License : MIT
+Other
+    Utils for TFT boot display,  sprinkler registry trough api
+    Author: Shanmugathas Vigneswaran
+    email: vigneswaran.shanmugathas@outlook.fr
 """
 
 import math
