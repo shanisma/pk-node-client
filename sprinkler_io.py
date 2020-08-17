@@ -36,4 +36,4 @@ def read_sensors(tag):
 
 # ======================== Output  ========================
 # =========================================================
-water_valve_relay = Pin(26, Pin.OUT)
+water_valve_relay = Pin(19, Pin.OUT)
