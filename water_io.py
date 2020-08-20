@@ -107,4 +107,3 @@ def read_sensors():
 water_pump_relay = Pin(19, Pin.OUT)
 nutrient_pump_relay = Pin(16, Pin.OUT)
 ph_downer_pump_relay = Pin(5, Pin.OUT)
-probe_cleaning_relay = Pin(17, Pin.OUT)
