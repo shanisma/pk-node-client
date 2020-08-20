@@ -118,19 +118,19 @@ def update_display():
     while True:
         # Flush dynamic part of screen
         _TFT.fillrect((0, 50), (128, 160), TFT.GRAY)
-        if flow_dict['current']['water_valve_signal']:
+        if flow_dict['current']['water_pump_signal']:
             _TFT.fillrect((110, 50), (20, 10), TFT.GREEN)
-            _TFT.text((2, 50), "Water valve on", TFT.BLACK, sysfont, 1.1, nowrap=False)
+            _TFT.text((2, 50), "Water pump on", TFT.BLACK, sysfont, 1.1, nowrap=False)
         else:
             _TFT.fillrect((110, 50), (20, 10), TFT.RED)
-            _TFT.text((2, 50), "Water valve off", TFT.BLACK, sysfont, 1.1, nowrap=False)
+            _TFT.text((2, 50), "Water pump off", TFT.BLACK, sysfont, 1.1, nowrap=False)
 
-        _TFT.text((2, 60), "Raw ADC: " + str(flow_dict['sensors']['soil_moisture_raw_adc']),
+        _TFT.text((2, 60), "",
                   TFT.BLACK, sysfont, 1.1, nowrap=False)
-        _TFT.text((2, 70), "Soil Moisture: " + str(flow_dict['sensors']['soil_moisture']),
+        _TFT.text((2, 70), "",
                   TFT.BLACK, sysfont, 1.1, nowrap=False)
 
-        _TFT.text((2, 70), "Soil Moisture: " + str(flow_dict['sensors']['soil_moisture']),
+        _TFT.text((2, 70), "",
                   TFT.BLACK, sysfont, 1.1, nowrap=False)
         if flow_dict['soft_fuse']:
             _TFT.text((2, 80), "Soft fuse !", TFT.RED, sysfont, 1.1, nowrap=False)
@@ -156,6 +156,8 @@ def soft_fuse():
         else:
             flow_dict['soft_fuse'] = False
 
+
+init_display()
 
 # =================================
 # Subscription to controller
