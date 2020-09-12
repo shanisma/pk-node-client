@@ -8,6 +8,9 @@ from machine import Pin, ADC
 from utils import fit
 from hcsr04 import HCSR04
 from influxdb_line_protocol import Metric
+from keyestudio import KS0429TdsMeterV1
+
+WATER_TEMPERATURE_IN_CELSIUS = 25
 
 # ======================== Input  =========================
 # =========================================================
@@ -22,6 +25,7 @@ water_level_fitter = fit(
 # -------------- ph Sensor
 # https://en.wikipedia.org/wiki/PH
 ph_sensor = ADC(Pin(33))
+# set 11dB input attenuation (voltage range roughly 0.0v - 3.6v)
 ph_sensor.atten(ADC.ATTN_11DB)
 ph_fitter = fit(
     # Map analog read min/max
@@ -32,20 +36,14 @@ ph_fitter = fit(
 )
 # -------------- EC Sensors (nutrient level in water)
 # https://en.wikipedia.org/wiki/Conductivity_(electrolytic)
+# Default sensor  KeyStudio TDS Meter : https://wiki.keyestudio.com/KS0429_keyestudio_TDS_Meter_V1.0
 ec_sensor = ADC(Pin(34))
+# set 11dB input attenuation (voltage range roughly 0.0v - 3.6v)
 ec_sensor.atten(ADC.ATTN_11DB)
-ec_fitter = fit(
-    # Map analog read min/max
-    # don't change this values for ADC
-    [0, 4095],
-    # depends on used sensor
-    # target default range [5 ; 50]
-    # units mS/m
-    [5, 50]
-)
 
 # https://en.wikipedia.org/wiki/Reduction_potential
 orp_sensor = ADC(Pin(35))
+# set 11dB input attenuation (voltage range roughly 0.0v - 3.6v)
 orp_sensor.atten(ADC.ATTN_11DB)
 orp_fitter = fit(
     # Map analog read min/max
@@ -74,7 +72,7 @@ def read_sensors():
     ph = int(ph_fitter(ph_raw_adc))
 
     ec_raw_adc = ec_sensor.read()
-    ec = int(ec_fitter(ec_raw_adc))
+    ec = KS0429TdsMeterV1().raw_adc_to_ppm(ec_raw_adc, WATER_TEMPERATURE_IN_CELSIUS)
 
     orp_raw_adc = orp_sensor.read()
     orp = int(orp_fitter(orp_raw_adc))
